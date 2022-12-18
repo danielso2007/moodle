@@ -1,0 +1,6 @@
+# Database configuration
+MOODLE_DB_USER=moodle
+MOODLE_DB_PASSWORD=123456
+MOODLE_DB_NAME=moodle
+UID=1000
+GID=1000

@@ -1,0 +1,46 @@
+version: '3.9'
+services:
+  moodle:
+    # user: "${UID}:${GID}"
+    image: bitnami/moodle:4.1.0
+    container_name: "moodle"
+    volumes:
+      - 'moodle_data:/bitnami/moodle'
+      - 'moodledata_data:/bitnami/moodledata'
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    networks:
+      moodle_local:
+    environment:
+      MOODLE_USERNAME: $MOODLE_USERNAME
+      MOODLE_PASSWORD: $MOODLE_PASSWORD
+      MOODLE_EMAIL: $MOODLE_EMAIL
+      MOODLE_SITE_NAME: $MOODLE_SITE_NAME
+      MOODLE_SKIP_BOOTSTRAP: $MOODLE_SKIP_BOOTSTRAP
+      MOODLE_HOST: $MOODLE_HOST
+      MOODLE_REVERSEPROXY: $MOODLE_REVERSEPROXY
+      MOODLE_SSLPROXY: $MOODLE_SSLPROXY
+      MOODLE_LANG: $MOODLE_LANG
+      EXTRA_LOCALES: $EXTRA_LOCALES
+      MOODLE_DATABASE_TYPE: $MOODLE_DATABASE_TYPE
+      MOODLE_DATABASE_HOST: $MOODLE_DATABASE_HOST
+      MOODLE_DATABASE_PORT_NUMBER: $MOODLE_DATABASE_PORT_NUMBER
+      MOODLE_DATABASE_NAME: $MOODLE_DATABASE_NAME
+      MOODLE_DATABASE_USER: $MOODLE_DATABASE_USER
+      MOODLE_DATABASE_PASSWORD: $MOODLE_DATABASE_PASSWORD
+      ALLOW_EMPTY_PASSWORD: $ALLOW_EMPTY_PASSWORD
+      MOODLE_SMTP_HOST: $MOODLE_SMTP_HOST
+      MOODLE_SMTP_PORT: $MOODLE_SMTP_PORT
+      MOODLE_SMTP_USER: $MOODLE_SMTP_USER
+      MOODLE_SMTP_PASSWORD: $MOODLE_SMTP_PASSWORD
+      MOODLE_SMTP_PROTOCOL: $MOODLE_SMTP_PROTOCOL
+      PHP_MEMORY_LIMIT: $PHP_MEMORY_LIMIT
+      BITNAMI_DEBUG: $BITNAMI_DEBUG
+volumes:
+  moodle_data:
+  moodledata_data:
+networks:
+  moodle_local:
+    name: moodle_network_local
+    external: true

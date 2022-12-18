@@ -1,0 +1,7 @@
+data
+logs
+*.dev
+.env
+.vagrant
+*.sql
+*.log

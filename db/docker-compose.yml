@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  db_moodle:
+    # user: "${UID}:${GID}"
+    image: "postgres:12.13-alpine"
+    container_name: "db_moodle"
+    # restart: always
+    environment:
+      PUID: 1000
+      PGID: 1000
+      POSTGRES_DB: '${MOODLE_DB_NAME}'
+      POSTGRES_USER: '${MOODLE_DB_USER}'
+      POSTGRES_PASSWORD: '${MOODLE_DB_PASSWORD}'
+    ports:
+      - "5432:5432"
+    volumes:
+      - "moodle_pgsql_conf:/etc/postgresql"
+      - "moodle_pgsql_data:/var/lib/postgresql/data"
+      - "moodle_pgsql_logs:/var/log"
+      - "./dump:/opt/dump"
+    networks:
+      moodle_local:
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  moodle_pgsql_conf:
+  moodle_pgsql_data:
+  moodle_pgsql_logs:
+networks:
+  moodle_local:
+    name: moodle_network_local
+    external: true
