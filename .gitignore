@@ -5,3 +5,6 @@ logs
 .vagrant
 *.sql
 *.log
+main/data
+main/html
+main/usr
