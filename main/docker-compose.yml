@@ -7,9 +7,9 @@ services:
     volumes:
       - 'moodle_data:/bitnami/moodle'
       - 'moodledata_data:/bitnami/moodledata'
-    ports:
-      - "8080:8080"
-      - "8443:8443"
+    #ports:
+    #  - "8080:8080"
+    #  - "8443:8443"
     networks:
       moodle_local:
     environment:

@@ -8,3 +8,7 @@ cd ..
 cd main
 docker-compose up -d &
 wait $!
+cd ..
+cd proxy
+docker-compose up -d &
+wait $!
